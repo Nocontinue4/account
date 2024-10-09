@@ -42,7 +42,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<TransactionProvider>(context, listen: false).initData();
   }

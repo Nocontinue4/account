@@ -17,11 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text("Vtuber"),
+        backgroundColor: Colors.lightBlue[400], // Light blue background
+        title: const Text(
+          "Vtuber",
+          style: TextStyle(color: Colors.white), // White text color
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.exit_to_app),
+            icon: const Icon(Icons.exit_to_app, color: Colors.white),
             onPressed: () {
               SystemNavigator.pop();
             },
@@ -52,18 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
-                      'ชื่อVtuber ${statement.title}',
+                      'ชื่อVtuber: ${statement.title}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.deepPurple,
+                        color: Colors.lightBlue, // Light blue text
                       ),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'สังกัด ${statement.company}',
+                          'สังกัด: ${statement.company}',
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
@@ -71,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          'แนวการสตรีม ${statement.title}',
+                          'แนวการสตรีม: ${statement.style}',
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
@@ -87,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     leading: CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Colors.lightBlue, // Light blue circle
                       child: Text(
                         statement.title[0],
                         style: const TextStyle(
