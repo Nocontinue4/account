@@ -32,7 +32,7 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ฟอร์มแก้ไขข้อมูล'),
+        title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

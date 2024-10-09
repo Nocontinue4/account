@@ -32,7 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, provider, child) {
           if (provider.transactions.isEmpty) {
             return const Center(
-              child: Text('ไม่มีรายการ'),
+              child: Text(
+                'ไม่มีรายการ',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
             );
           } else {
             return ListView.builder(
@@ -40,33 +43,39 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 var statement = provider.transactions[index];
                 return Card(
-                  elevation: 5,
+                  elevation: 4,
                   margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
-                      statement.title,
+                      'ชื่อVtuber ${statement.title}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 20,
+                        color: Colors.deepPurple,
                       ),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          statement.company,
+                          'สังกัด ${statement.company}',
                           style: const TextStyle(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                             fontSize: 16,
+                            color: Colors.black87,
                           ),
                         ),
                         Text(
-                          statement.style,
+                          'แนวการสตรีม ${statement.title}',
                           style: const TextStyle(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                             fontSize: 16,
+                            color: Colors.black87,
                           ),
                         ),
                         Text(
@@ -74,31 +83,46 @@ class _HomeScreenState extends State<HomeScreen> {
                               .format(statement.date),
                           style: const TextStyle(color: Colors.grey),
                         ),
-                        const SizedBox(height: 4),
                       ],
                     ),
-                    leading: Container(
-                      width: 60,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          statement.title[0],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.deepPurple,
+                      child: Text(
+                        statement.title[0],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
                         ),
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete),
+                      icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
-                        provider.deleteTransaction(statement.keyID);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('ยืนยันการลบ'),
+                            content:
+                                const Text('คุณต้องการลบรายการนี้หรือไม่?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('ยกเลิก'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  provider.deleteTransaction(statement.keyID);
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('ลบ'),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                     onTap: () {
