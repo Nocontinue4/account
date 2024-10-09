@@ -101,7 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete,
+                          color: Color.fromARGB(255, 101, 124, 255)),
                       onPressed: () {
                         showDialog(
                           context: context,

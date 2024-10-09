@@ -32,7 +32,11 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
+        backgroundColor: Colors.lightBlue[400], // Light blue background
+        title: const Text(
+          'แบบฟอร์มแก้ไขข้อมูล',
+          style: TextStyle(color: Colors.white), // White text color
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -108,7 +112,7 @@ class _EditScreenState extends State<EditScreen> {
               const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.lightBlue[400], // Light blue button
                   padding: const EdgeInsets.symmetric(
                       vertical: 12.0, horizontal: 20.0),
                 ),

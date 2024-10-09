@@ -21,7 +21,11 @@ class _FormScreenState extends State<FormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('แบบฟอร์มเพิ่มข้อมูล'),
+        backgroundColor: Colors.lightBlue[400], // Light blue background
+        title: const Text(
+          'แบบฟอร์มเพิ่มข้อมูล',
+          style: TextStyle(color: Colors.white), // White text color
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,7 +101,7 @@ class _FormScreenState extends State<FormScreen> {
               const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.lightBlue[400], // Light blue button
                   padding: const EdgeInsets.symmetric(
                       vertical: 12.0, horizontal: 20.0),
                 ),
