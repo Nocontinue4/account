@@ -15,27 +15,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlue[400],
         title: const Text(
           "Vtuber",
           style: TextStyle(color: Colors.white),
-=======
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) {
-          return TransactionProvider();
-        }),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 56, 156, 250)),
-          useMaterial3: true,
->>>>>>> b7e9449ab43431658a5a46d47b2e4797aeb41635
         ),
         actions: [
           IconButton(

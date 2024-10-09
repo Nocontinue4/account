@@ -60,11 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-<<<<<<< HEAD
                         color: Colors.lightBlue, // Highlight color
-=======
-                        color: Colors.lightBlue,
->>>>>>> b7e9449ab43431658a5a46d47b2e4797aeb41635
                       ),
                     ),
                     subtitle: Column(
@@ -95,11 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     leading: CircleAvatar(
                       radius: 30,
-<<<<<<< HEAD
                       backgroundColor: Colors.lightBlue,
-=======
-                      backgroundColor: Colors.lightBlue[400],
->>>>>>> b7e9449ab43431658a5a46d47b2e4797aeb41635
                       child: Text(
                         statement.title[0],
                         style: const TextStyle(
