@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.lightBlue, // Highlight color
+                        color: Colors.lightBlue,
                       ),
                     ),
                     subtitle: Column(
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
-                            color: Colors.lightBlue, // Highlight color
+                            color: Colors.lightBlue,
                           ),
                         ),
                         Text(
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
-                            color: Colors.lightBlue, // Highlight color
+                            color: Colors.lightBlue,
                           ),
                         ),
                         Text(
@@ -103,9 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.blue),
-                      onPressed: () {
-                        // Your delete functionality
-                      },
+                      onPressed: () {},
                     ),
                     onTap: () {
                       Navigator.push(

@@ -97,12 +97,10 @@ class _FormScreenState extends State<FormScreen> {
       var provider = Provider.of<TransactionProvider>(context, listen: false);
       provider.addTransaction(statement);
 
-      // Clear the text fields
       titleController.clear();
       companyController.clear();
       styleController.clear();
 
-      // Navigate back to the previous screen
       Navigator.pop(context);
     }
   }

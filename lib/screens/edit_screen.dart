@@ -121,7 +121,7 @@ class _EditScreenState extends State<EditScreen> {
       var provider = Provider.of<TransactionProvider>(context, listen: false);
       provider.updateTransaction(updatedStatement);
 
-      Navigator.pop(context); // Navigate back to the previous screen
+      Navigator.pop(context);
     }
   }
 }
