@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class EditScreen extends StatefulWidget {
   final Transactions statement;
 
-  const EditScreen({super.key, required this.statement});
+  EditScreen({super.key, required this.statement});
 
   @override
   State<EditScreen> createState() => _EditScreenState();
@@ -15,6 +15,7 @@ class EditScreen extends StatefulWidget {
 
 class _EditScreenState extends State<EditScreen> {
   final formKey = GlobalKey<FormState>();
+
   final titleController = TextEditingController();
   final companyController = TextEditingController();
   final styleController = TextEditingController();
@@ -25,14 +26,6 @@ class _EditScreenState extends State<EditScreen> {
     titleController.text = widget.statement.title;
     companyController.text = widget.statement.company;
     styleController.text = widget.statement.style;
-  }
-
-  @override
-  void dispose() {
-    titleController.dispose();
-    companyController.dispose();
-    styleController.dispose();
-    super.dispose();
   }
 
   @override
@@ -51,19 +44,70 @@ class _EditScreenState extends State<EditScreen> {
           key: formKey,
           child: Column(
             children: [
-              _buildTextField(
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'ชื่อ Vtuber',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide:
+                        const BorderSide(color: Colors.blue, width: 2.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.all(10),
+                ),
+                autofocus: false,
                 controller: titleController,
-                label: 'ชื่อ Vtuber',
+                validator: (String? str) {
+                  if (str == null || str.isEmpty) {
+                    return 'กรุณากรอกข้อมูล';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
-              _buildTextField(
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'สังกัดค่าย',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide:
+                        const BorderSide(color: Colors.blue, width: 2.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.all(10),
+                ),
+                autofocus: false,
                 controller: companyController,
-                label: 'สังกัดค่าย',
+                validator: (String? str) {
+                  if (str == null || str.isEmpty) {
+                    return 'กรุณากรอกข้อมูล';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
-              _buildTextField(
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'แนวการสตรีม',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide:
+                        const BorderSide(color: Colors.blue, width: 2.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.all(10),
+                ),
+                autofocus: false,
                 controller: styleController,
-                label: 'แนวการสตรีม',
+                validator: (String? str) {
+                  if (str == null || str.isEmpty) {
+                    return 'กรุณากรอกข้อมูล';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               TextButton(
@@ -76,52 +120,36 @@ class _EditScreenState extends State<EditScreen> {
                   'แก้ไขข้อมูล',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: _onEditPressed,
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    var statement = Transactions(
+                      keyID: widget.statement.keyID,
+                      title: titleController.text,
+                      company: companyController.text,
+                      style: styleController.text,
+                      date: DateTime.now(),
+                    );
+
+                    var provider = Provider.of<TransactionProvider>(context,
+                        listen: false);
+                    provider.updateTransaction(statement);
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) {
+                          return MyHomePage();
+                        },
+                      ),
+                    );
+                  }
+                },
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  Widget _buildTextField(
-      {required TextEditingController controller, required String label}) {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-        ),
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: const EdgeInsets.all(10),
-      ),
-      controller: controller,
-      validator: (String? str) {
-        if (str == null || str.isEmpty) {
-          return 'กรุณากรอกข้อมูล';
-        }
-        return null;
-      },
-    );
-  }
-
-  void _onEditPressed() {
-    if (formKey.currentState!.validate()) {
-      var updatedStatement = Transactions(
-        keyID: widget.statement.keyID,
-        title: titleController.text,
-        company: companyController.text,
-        style: styleController.text,
-        date: DateTime.now(),
-      );
-
-      var provider = Provider.of<TransactionProvider>(context, listen: false);
-      provider.updateTransaction(updatedStatement);
-
-      Navigator.pop(context);
-    }
   }
 }
