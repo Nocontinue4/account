@@ -56,14 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          statement.company, // Show the company name
+                          statement.company,
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                           ),
                         ),
                         Text(
-                          statement.style, // Show the style name
+                          statement.style,
                           style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
@@ -81,15 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 60,
                       height: 80,
                       decoration: BoxDecoration(
-                        color:
-                            Colors.blue, // Set your preferred background color
-                        borderRadius:
-                            BorderRadius.circular(8), // Rounded corners
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: Center(
                         child: Text(
-                          statement.title[
-                              0], // Example: showing the first letter of the title
+                          statement.title[0],
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

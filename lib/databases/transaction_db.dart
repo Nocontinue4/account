@@ -56,7 +56,6 @@ class TransactionDB {
     var store = intMapStoreFactory.store('expense');
     await store.delete(db,
         finder: Finder(filter: Filter.equals(Field.key, index)));
-    // Delete from table... where rowId = index
     db.close();
   }
 

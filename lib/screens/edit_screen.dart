@@ -50,7 +50,7 @@ class _EditScreenState extends State<EditScreen> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'ชื่อค่าย',
+                    labelText: 'สังกัดค่าย',
                   ),
                   autofocus: false,
                   controller: companyController,
@@ -76,7 +76,6 @@ class _EditScreenState extends State<EditScreen> {
                     child: const Text('แก้ไขข้อมูล'),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        // create transaction data object
                         var statement = Transactions(
                             keyID: widget.statement.keyID,
                             title: titleController.text,
@@ -84,7 +83,6 @@ class _EditScreenState extends State<EditScreen> {
                             style: styleController.text,
                             date: DateTime.now());
 
-                        // add transaction data object to provider
                         var provider = Provider.of<TransactionProvider>(context,
                             listen: false);
 
