@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           bottomNavigationBar: TabBar(
             tabs: [
               Tab(
-                text: "รายการธุรกรรม",
+                text: "รายการข้อมูล",
                 icon: Icon(Icons.list),
               ),
               Tab(

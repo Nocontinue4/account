@@ -30,7 +30,7 @@ class _EditScreenState extends State<EditScreen> {
     styleController.text = widget.statement.style;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
+          title: const Text('ฟอร์มแก้ไขข้อมูล'),
         ),
         body: Form(
             key: formKey,
