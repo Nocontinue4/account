@@ -17,10 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue[400], // Light blue background
+        backgroundColor: Colors.lightBlue[400],
         title: const Text(
           "Vtuber",
-          style: TextStyle(color: Colors.white), // White text color
+          style: TextStyle(color: Colors.white),
         ),
         actions: [
           IconButton(
@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  color: Colors.lightBlue[50],
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.lightBlue, // Light blue text
+                        color: Colors.lightBlue,
                       ),
                     ),
                     subtitle: Column(
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     leading: CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.lightBlue, // Light blue circle
+                      backgroundColor: Colors.lightBlue[400],
                       child: Text(
                         statement.title[0],
                         style: const TextStyle(
@@ -101,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete,
-                          color: Color.fromARGB(255, 101, 124, 255)),
+                      icon: const Icon(Icons.delete, color: Colors.blue),
                       onPressed: () {
                         showDialog(
                           context: context,
