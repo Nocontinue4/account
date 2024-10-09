@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  color: Colors.lightBlue[50],
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
@@ -59,7 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
+<<<<<<< HEAD
                         color: Colors.lightBlue, // Highlight color
+=======
+                        color: Colors.lightBlue,
+>>>>>>> b7e9449ab43431658a5a46d47b2e4797aeb41635
                       ),
                     ),
                     subtitle: Column(
@@ -90,7 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     leading: CircleAvatar(
                       radius: 30,
+<<<<<<< HEAD
                       backgroundColor: Colors.lightBlue,
+=======
+                      backgroundColor: Colors.lightBlue[400],
+>>>>>>> b7e9449ab43431658a5a46d47b2e4797aeb41635
                       child: Text(
                         statement.title[0],
                         style: const TextStyle(
@@ -101,8 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete,
-                          color: Color.fromARGB(255, 101, 124, 255)),
+                      icon: const Icon(Icons.delete, color: Colors.blue),
                       onPressed: () {
                         // Your delete functionality
                       },
