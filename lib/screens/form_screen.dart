@@ -1,6 +1,5 @@
 import 'package:account/main.dart';
 import 'package:account/models/transactions.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:account/provider/transaction_provider.dart';
