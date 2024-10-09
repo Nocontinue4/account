@@ -52,15 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  color: Colors.lightBlue[50],
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
-                      'ชื่อVtuber: ${statement.title}',
+                      'ชื่อ Vtuber: ${statement.title}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.lightBlue,
+                        color: Colors.lightBlue, // Highlight color
                       ),
                     ),
                     subtitle: Column(
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
-                            color: Colors.black87,
+                            color: Colors.lightBlue, // Highlight color
                           ),
                         ),
                         Text(
@@ -79,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
-                            color: Colors.black87,
+                            color: Colors.lightBlue, // Highlight color
                           ),
                         ),
                         Text(
@@ -91,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     leading: CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.lightBlue[400],
+                      backgroundColor: Colors.lightBlue,
                       child: Text(
                         statement.title[0],
                         style: const TextStyle(
@@ -102,31 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.blue),
+                      icon: const Icon(Icons.delete,
+                          color: Color.fromARGB(255, 101, 124, 255)),
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('ยืนยันการลบ'),
-                            content:
-                                const Text('คุณต้องการลบรายการนี้หรือไม่?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('ยกเลิก'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  provider.deleteTransaction(statement.keyID);
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('ลบ'),
-                              ),
-                            ],
-                          ),
-                        );
+                        // Your delete functionality
                       },
                     ),
                     onTap: () {

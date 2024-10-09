@@ -18,14 +18,18 @@ class _FormScreenState extends State<FormScreen> {
   final styleController = TextEditingController();
 
   @override
+  void dispose() {
+    titleController.dispose();
+    companyController.dispose();
+    styleController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue[400], // Light blue background
-        title: const Text(
-          'แบบฟอร์มเพิ่มข้อมูล',
-          style: TextStyle(color: Colors.white), // White text color
-        ),
+        title: const Text('แบบฟอร์มเพิ่มข้อมูล'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,75 +37,15 @@ class _FormScreenState extends State<FormScreen> {
           key: formKey,
           child: Column(
             children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'ชื่อ Vtuber',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide:
-                        const BorderSide(color: Colors.blue, width: 2.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.all(10),
-                ),
-                autofocus: false,
-                controller: titleController,
-                validator: (String? str) {
-                  if (str == null || str.isEmpty) {
-                    return 'กรุณากรอกข้อมูล';
-                  }
-                  return null;
-                },
-              ),
+              _buildTextField(titleController, 'ชื่อ Vtuber'),
               const SizedBox(height: 16),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'ชื่อค่าย',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide:
-                        const BorderSide(color: Colors.blue, width: 2.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.all(10),
-                ),
-                autofocus: false,
-                controller: companyController,
-                validator: (String? str) {
-                  if (str == null || str.isEmpty) {
-                    return 'กรุณากรอกข้อมูล';
-                  }
-                  return null;
-                },
-              ),
+              _buildTextField(companyController, 'สังกัดค่าย'),
               const SizedBox(height: 16),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'แนวการสตรีม',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide:
-                        const BorderSide(color: Colors.blue, width: 2.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.all(10),
-                ),
-                autofocus: false,
-                controller: styleController,
-                validator: (String? str) {
-                  if (str == null || str.isEmpty) {
-                    return 'กรุณากรอกข้อมูล';
-                  }
-                  return null;
-                },
-              ),
+              _buildTextField(styleController, 'แนวการสตรีม'),
               const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.lightBlue[400], // Light blue button
+                  backgroundColor: Colors.deepPurple,
                   padding: const EdgeInsets.symmetric(
                       vertical: 12.0, horizontal: 20.0),
                 ),
@@ -109,36 +53,57 @@ class _FormScreenState extends State<FormScreen> {
                   'บันทึก',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    var statement = Transactions(
-                      keyID: null,
-                      title: titleController.text,
-                      company: companyController.text,
-                      style: styleController.text,
-                      date: DateTime.now(),
-                    );
-
-                    var provider = Provider.of<TransactionProvider>(context,
-                        listen: false);
-                    provider.addTransaction(statement);
-
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (context) {
-                          return MyHomePage();
-                        },
-                      ),
-                    );
-                  }
-                },
+                onPressed: _onSubmit,
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildTextField(TextEditingController controller, String label) {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+        ),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.all(10),
+      ),
+      controller: controller,
+      validator: (String? str) {
+        if (str == null || str.isEmpty) {
+          return 'กรุณากรอกข้อมูล';
+        }
+        return null;
+      },
+    );
+  }
+
+  void _onSubmit() {
+    if (formKey.currentState!.validate()) {
+      var statement = Transactions(
+        keyID: null,
+        title: titleController.text,
+        company: companyController.text,
+        style: styleController.text,
+        date: DateTime.now(),
+      );
+
+      var provider = Provider.of<TransactionProvider>(context, listen: false);
+      provider.addTransaction(statement);
+
+      // Clear the text fields
+      titleController.clear();
+      companyController.clear();
+      styleController.clear();
+
+      // Navigate back to the previous screen
+      Navigator.pop(context);
+    }
   }
 }

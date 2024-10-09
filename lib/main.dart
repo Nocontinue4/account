@@ -1,75 +1,129 @@
-import 'package:account/screens/form_screen.dart';
-import 'package:account/screens/home_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:account/provider/transaction_provider.dart';
+import 'package:account/screens/edit_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) {
-          return TransactionProvider();
-        }),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 56, 156, 250)),
-          useMaterial3: true,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue[400],
+        title: const Text(
+          "Vtuber",
+          style: TextStyle(color: Colors.white),
         ),
-        home: const MyHomePage(),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.exit_to_app, color: Colors.white),
+            onPressed: () {
+              SystemNavigator.pop();
+            },
+          ),
+        ],
+      ),
+      body: Consumer<TransactionProvider>(
+        builder: (context, provider, child) {
+          if (provider.transactions.isEmpty) {
+            return const Center(
+              child: Text(
+                'ไม่มีรายการ',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: provider.transactions.length,
+              itemBuilder: (context, index) {
+                var statement = provider.transactions[index];
+                return Card(
+                  elevation: 4,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(16.0),
+                    title: Text(
+                      'ชื่อ Vtuber: ${statement.title}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.lightBlue, // Highlight color
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'สังกัด: ${statement.company}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Colors.lightBlue, // Highlight color
+                          ),
+                        ),
+                        Text(
+                          'แนวการสตรีม: ${statement.style}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Colors.lightBlue, // Highlight color
+                          ),
+                        ),
+                        Text(
+                          DateFormat('dd MMM yyyy hh:mm:ss')
+                              .format(statement.date),
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.lightBlue,
+                      child: Text(
+                        statement.title[0],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete,
+                          color: Color.fromARGB(255, 101, 124, 255)),
+                      onPressed: () {
+                        // Your delete functionality
+                      },
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return EditScreen(statement: statement);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
+          }
+        },
       ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<TransactionProvider>(context, listen: false).initData();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          body: TabBarView(
-            children: [
-              HomeScreen(),
-              FormScreen(),
-            ],
-          ),
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(
-                text: "รายการข้อมูล",
-                icon: Icon(Icons.list),
-              ),
-              Tab(
-                text: "เพิ่มข้อมูล",
-                icon: Icon(Icons.add),
-              ),
-            ],
-          ),
-        ));
   }
 }
